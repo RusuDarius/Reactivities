@@ -1,0 +1,17 @@
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Persistence.deps.json
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Persistence.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Persistence.pdb
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Domain.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Domain.pdb
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.csproj.AssemblyReference.cache
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.AssemblyInfoInputs.cache
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.AssemblyInfo.cs
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.csproj.CoreCompileInputs.cache
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.csproj.CopyComplete
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/refint/Persistence.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.pdb
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/ref/Persistence.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/bin/Debug/net8.0/Persistence.runtimeconfig.json
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/Persistence/obj/Debug/net8.0/Persistence.genruntimeconfig.cache
