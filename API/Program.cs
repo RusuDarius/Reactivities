@@ -1,3 +1,4 @@
+using Application.Activities;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -5,12 +6,13 @@ using Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(
+    config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly)
+);
 
 builder.Services.AddDbContext<DataContext>(opt =>
 {
