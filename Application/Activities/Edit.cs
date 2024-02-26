@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
@@ -12,8 +13,7 @@ namespace Application.Activities
     {
         public class Command : IRequest
         {
-            public Activity activity { get; set; }
-            public Guid Id { get; set; }
+            public Activity Activity { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -27,7 +27,30 @@ namespace Application.Activities
 
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                try
+                {
+                    if (request is not null)
+                    {
+                        var updatedActivity = await _context.Activities.FirstOrDefaultAsync(
+                            act => act.Id == request.Activity.Id
+                        );
+                        if (updatedActivity is not null)
+                        {
+                            updatedActivity.Title = request.Activity.Title;
+                            updatedActivity.Date = request.Activity.Date;
+                            updatedActivity.Description = request.Activity.Description;
+                            updatedActivity.Category = request.Activity.Category;
+                            updatedActivity.City = request.Activity.City;
+                            updatedActivity.Venue = request.Activity.Venue;
+
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+                catch (System.Exception)
+                {
+                    throw new Exception("No activity found in the database.");
+                }
             }
         }
     }
