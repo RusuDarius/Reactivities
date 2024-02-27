@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "2oCrJfEBRZGb2AOEekiKyqAG8S3Os5dnWBPmfdujx2RivKqzVx0R6wXkU6nFw8UI51iHE3B6JqUstm3yNdEa4A==",
+  "dgSpecHash": "Ayiz2pHk1rVyUTD3SYgUwBfppc5Kq14QZg4QnRHk0af8Ut2ZA8WqCEw3SUk+6FSmtSxZ5ERqo9vAj5mChEUTFQ==",
   "success": true,
   "projectFilePath": "/Users/dariusrusu/work/personal/chiuveta/Reactivities/API/API.csproj",
   "expectedPackageFiles": [
+    "/Users/dariusrusu/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/dariusrusu/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
@@ -13,6 +15,7 @@
     "/Users/dariusrusu/.nuget/packages/microsoft.codeanalysis.csharp/4.5.0/microsoft.codeanalysis.csharp.4.5.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.codeanalysis.csharp.workspaces/4.5.0/microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.codeanalysis.workspaces.common/4.5.0/microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
+    "/Users/dariusrusu/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.data.sqlite.core/8.0.2/microsoft.data.sqlite.core.8.0.2.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.entityframeworkcore/8.0.2/microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.2/microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",

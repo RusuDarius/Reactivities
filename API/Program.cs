@@ -1,5 +1,5 @@
 using Application.Activities;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddMediatR(
     config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly)
 );

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "H4oX/5Br4m1DKbUisFmDTGd+ZR6cPefHb/HQTrLwhaVmdVvs2KVXuP26YFvnlUpPUHFC3X0ccSV9u6Dy9U2rCg==",
+  "dgSpecHash": "M6d8SFv2/SHjZRNT0Getd9kUUHiPkYjvJyU9DKugeuaRY33mQMNO6yhTateAgywYkzR+K4wDncycviXJQJv5tQ==",
   "success": true,
   "projectFilePath": "/Users/dariusrusu/work/personal/chiuveta/Reactivities/Application/Application.csproj",
   "expectedPackageFiles": [
+    "/Users/dariusrusu/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/dariusrusu/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/dariusrusu/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.data.sqlite.core/8.0.2/microsoft.data.sqlite.core.8.0.2.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.entityframeworkcore/8.0.2/microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
     "/Users/dariusrusu/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.2/microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",

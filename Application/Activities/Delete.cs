@@ -1,4 +1,3 @@
-using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -6,21 +5,19 @@ using Persistence;
 
 namespace Application.Activities
 {
-    public class Edit
+    public class Delete
     {
         public class Command : IRequest
         {
-            public Activity Activity { get; set; }
+            public Guid Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            private readonly IMapper _mapper;
 
-            public Handler(DataContext context, IMapper mapper)
+            public Handler(DataContext context)
             {
-                _mapper = mapper;
                 _context = context;
             }
 
@@ -28,12 +25,13 @@ namespace Application.Activities
             {
                 if (request is not null)
                 {
-                    var activityToUpdate = await _context.Activities.FirstOrDefaultAsync(
-                        act => act.Id == request.Activity.Id
+                    var activityToDelete = await _context.Activities.FirstOrDefaultAsync(
+                        activity => activity.Id == request.Id
                     );
-                    if (activityToUpdate is not null)
+                    // var activity_to_delete = await _context.Activities.FindAsync(request.Id);
+                    if (activityToDelete is not null)
                     {
-                        _mapper.Map(request.Activity, activityToUpdate);
+                        _context.Activities.Remove(activityToDelete);
                         await _context.SaveChangesAsync();
                     }
                 }

@@ -134,3 +134,5 @@
 /Users/dariusrusu/work/personal/chiuveta/Reactivities/API/obj/Debug/net8.0/API.sourcelink.json
 /Users/dariusrusu/work/personal/chiuveta/Reactivities/API/bin/Debug/net8.0/MediatR.dll
 /Users/dariusrusu/work/personal/chiuveta/Reactivities/API/bin/Debug/net8.0/MediatR.Contracts.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/API/bin/Debug/net8.0/AutoMapper.dll
+/Users/dariusrusu/work/personal/chiuveta/Reactivities/API/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
