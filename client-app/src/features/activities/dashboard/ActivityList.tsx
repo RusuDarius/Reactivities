@@ -15,6 +15,7 @@ import { Activity } from "../../../app/models/activity";
 interface ListProps {
   activities: Activity[];
   selectActivity: (id: string) => void;
+  deleteActivity: (id: string) => void;
 }
 
 function LabelDisplaySwitch(activity: Activity) {
@@ -40,7 +41,11 @@ function LabelDisplaySwitch(activity: Activity) {
   }
 }
 
-const ActivityList = ({ activities, selectActivity }: ListProps) => {
+const ActivityList = ({
+  activities,
+  selectActivity,
+  deleteActivity,
+}: ListProps) => {
   return (
     <Segment>
       <ItemGroup divided>
@@ -56,6 +61,12 @@ const ActivityList = ({ activities, selectActivity }: ListProps) => {
                   color="blue"
                   content="View"
                   onClick={() => selectActivity(activity.id)}
+                />
+                <Button
+                  floated="right"
+                  color="red"
+                  content="Delete"
+                  onClick={() => deleteActivity(activity.id)}
                 />
                 {LabelDisplaySwitch(activity)}
               </ItemExtra>

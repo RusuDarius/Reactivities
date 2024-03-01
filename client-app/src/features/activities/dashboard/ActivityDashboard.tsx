@@ -13,6 +13,7 @@ interface DashboardProps {
   closeForm: () => void;
   openForm: (id: string) => void;
   createOrEdit: (activity: Activity) => void;
+  deleteActivity: (id: string) => void;
 }
 
 const ActivityDashboard = ({
@@ -24,11 +25,16 @@ const ActivityDashboard = ({
   closeForm,
   openForm,
   createOrEdit,
+  deleteActivity,
 }: DashboardProps) => {
   return (
     <Grid>
       <GridColumn width={10}>
-        <ActivityList activities={activities} selectActivity={selectActivity} />
+        <ActivityList
+          activities={activities}
+          selectActivity={selectActivity}
+          deleteActivity={deleteActivity}
+        />
       </GridColumn>
       <GridColumn width={6}>
         {selectedActivity && !isFormOpen && (
