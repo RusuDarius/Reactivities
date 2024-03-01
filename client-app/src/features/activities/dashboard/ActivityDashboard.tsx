@@ -12,6 +12,7 @@ interface DashboardProps {
   isFormOpen: boolean;
   closeForm: () => void;
   openForm: (id: string) => void;
+  createOrEdit: (activity: Activity) => void;
 }
 
 const ActivityDashboard = ({
@@ -22,6 +23,7 @@ const ActivityDashboard = ({
   isFormOpen,
   closeForm,
   openForm,
+  createOrEdit,
 }: DashboardProps) => {
   return (
     <Grid>
@@ -38,7 +40,11 @@ const ActivityDashboard = ({
           />
         )}
         {isFormOpen && (
-          <ActivityForm closeForm={closeForm} activity={selectedActivity} />
+          <ActivityForm
+            closeForm={closeForm}
+            activity={selectedActivity}
+            createOrEdit={createOrEdit}
+          />
         )}
       </GridColumn>
     </Grid>

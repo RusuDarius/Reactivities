@@ -37,6 +37,17 @@ function App() {
     setIsFormOpen(false);
   };
 
+  const handleCreateOrEditActivity = (activity: Activity) => {
+    activity.id
+      ? setActivities([
+          ...activities.filter((act) => act.id != activity.id),
+          activity,
+        ])
+      : setActivities([...activities, activity]);
+    setIsFormOpen(false);
+    setSelectedActivity(activity);
+  };
+
   return (
     <>
       <NavBar openForm={handleFormOpen} />
@@ -49,6 +60,7 @@ function App() {
           isFormOpen={isFormOpen}
           closeForm={handleFormClose}
           openForm={handleFormOpen}
+          createOrEdit={handleCreateOrEditActivity}
         />
       </Container>
     </>

@@ -13,9 +13,14 @@ import { ChangeEvent, useState } from "react";
 interface FormProps {
   closeForm: () => void;
   activity: Activity | undefined;
+  createOrEdit: (activity: Activity) => void;
 }
 
-const ActivityForm = ({ closeForm, activity: selectedActivity }: FormProps) => {
+const ActivityForm = ({
+  closeForm,
+  activity: selectedActivity,
+  createOrEdit,
+}: FormProps) => {
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
@@ -28,7 +33,7 @@ const ActivityForm = ({ closeForm, activity: selectedActivity }: FormProps) => {
   const [activity, setActivity] = useState(initialState);
 
   const handleSubmit = () => {
-    console.log(activity);
+    createOrEdit(activity);
   };
 
   const handleInputChange = (
