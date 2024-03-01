@@ -12,11 +12,10 @@ import { Activity } from "../../../app/models/activity";
 
 interface DetailsProps {
   activity: Activity;
+  cancelSelectActivity: () => void;
 }
 
-//TODO Details for activities need to be implemented onClick
-
-const ActivityDetails = ({ activity }: DetailsProps) => {
+const ActivityDetails = ({ activity, cancelSelectActivity }: DetailsProps) => {
   return (
     <Card fluid>
       <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
@@ -30,7 +29,11 @@ const ActivityDetails = ({ activity }: DetailsProps) => {
       <CardContent extra>
         <ButtonGroup widths={2}>
           <Button color="blue" content="Edit" />
-          <Button color="grey" content="Cancel" />
+          <Button
+            color="grey"
+            content="Cancel"
+            onClick={() => cancelSelectActivity()}
+          />
         </ButtonGroup>
       </CardContent>
     </Card>

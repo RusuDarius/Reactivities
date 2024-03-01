@@ -14,6 +14,7 @@ import { Activity } from "../../../app/models/activity";
 
 interface ListProps {
   activities: Activity[];
+  selectActivity: (id: string) => void;
 }
 
 function LabelSwitch(activity: Activity) {
@@ -39,7 +40,7 @@ function LabelSwitch(activity: Activity) {
   }
 }
 
-const ActivityList = ({ activities }: ListProps) => {
+const ActivityList = ({ activities, selectActivity }: ListProps) => {
   return (
     <Segment>
       <ItemGroup divided>
@@ -50,7 +51,12 @@ const ActivityList = ({ activities }: ListProps) => {
               <ItemMeta>{activity.date}</ItemMeta>
               <ItemDescription>{activity.description}</ItemDescription>
               <ItemExtra>
-                <Button floated="right" color="blue" content="View" />
+                <Button
+                  floated="right"
+                  color="blue"
+                  content="View"
+                  onClick={() => selectActivity(activity.id)}
+                />
                 {LabelSwitch(activity)}
               </ItemExtra>
             </ItemContent>
