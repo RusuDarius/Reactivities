@@ -9,6 +9,9 @@ interface DashboardProps {
   selectedActivity: Activity | undefined;
   selectActivity: (id: string) => void;
   cancelSelectActivity: () => void;
+  isFormOpen: boolean;
+  closeForm: () => void;
+  openForm: (id: string) => void;
 }
 
 const ActivityDashboard = ({
@@ -16,6 +19,9 @@ const ActivityDashboard = ({
   selectActivity,
   selectedActivity,
   cancelSelectActivity,
+  isFormOpen,
+  closeForm,
+  openForm,
 }: DashboardProps) => {
   return (
     <Grid>
@@ -23,13 +29,17 @@ const ActivityDashboard = ({
         <ActivityList activities={activities} selectActivity={selectActivity} />
       </GridColumn>
       <GridColumn width={6}>
-        {selectedActivity && (
+        {selectedActivity && !isFormOpen && (
           <ActivityDetails
             activity={selectedActivity}
             cancelSelectActivity={cancelSelectActivity}
+            openForm={() => openForm(selectedActivity.id)}
+            closeForm={closeForm}
           />
         )}
-        <ActivityForm />
+        {isFormOpen && (
+          <ActivityForm closeForm={closeForm} activity={selectedActivity} />
+        )}
       </GridColumn>
     </Grid>
   );

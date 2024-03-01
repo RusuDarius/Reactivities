@@ -17,7 +17,7 @@ interface ListProps {
   selectActivity: (id: string) => void;
 }
 
-function LabelSwitch(activity: Activity) {
+function LabelDisplaySwitch(activity: Activity) {
   switch (activity.category) {
     case "drinks":
       return <Label color="green">{activity.category}</Label>;
@@ -57,7 +57,7 @@ const ActivityList = ({ activities, selectActivity }: ListProps) => {
                   content="View"
                   onClick={() => selectActivity(activity.id)}
                 />
-                {LabelSwitch(activity)}
+                {LabelDisplaySwitch(activity)}
               </ItemExtra>
             </ItemContent>
           </Item>
