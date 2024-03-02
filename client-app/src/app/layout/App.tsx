@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import agent from "../api/agent";
+import LoadingComponents from "./LoadingComponents";
 
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -12,6 +13,7 @@ function App() {
     Activity | undefined
   >(undefined);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.Activities.list().then((res) => {
@@ -21,6 +23,7 @@ function App() {
         activities.push(activity);
       });
       setActivities(activities);
+      setLoading(false);
     });
   }, []);
 
@@ -55,6 +58,8 @@ function App() {
   const handleDeleteActivity = (id: string) => {
     setActivities(activities.filter((act) => act.id != id));
   };
+
+  if (loading) return <LoadingComponents content="Loading app" />;
 
   return (
     <>
