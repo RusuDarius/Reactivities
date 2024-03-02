@@ -66,6 +66,7 @@ const ActivityForm = ({
         ></FormInput>
         <FormInput
           placeholder="Date"
+          type="date"
           value={activity.date}
           name="date"
           onChange={handleInputChange}
