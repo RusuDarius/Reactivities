@@ -14,7 +14,9 @@ function App() {
   >(undefined);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
+  //* Fetch data from the BE
   useEffect(() => {
     agent.Activities.list().then((res) => {
       const activities: Activity[] = [];
@@ -45,14 +47,26 @@ function App() {
   };
 
   const handleCreateOrEditActivity = (activity: Activity) => {
-    activity.id
-      ? setActivities([
+    setSubmitting(true);
+    if (activity.id) {
+      agent.Activities.update(activity).then(() => {
+        setActivities([
           ...activities.filter((act) => act.id != activity.id),
           activity,
-        ])
-      : setActivities([...activities, { ...activity, id: uuid() }]);
-    setIsFormOpen(false);
-    setSelectedActivity(activity);
+        ]);
+        setSelectedActivity(activity);
+        setIsFormOpen(false);
+        setSubmitting(false);
+      });
+    } else {
+      activity.id = uuid();
+      agent.Activities.create(activity).then(() => {
+        setActivities([...activities, activity]);
+        setSelectedActivity(activity);
+        setIsFormOpen(false);
+        setSubmitting(false);
+      });
+    }
   };
 
   const handleDeleteActivity = (id: string) => {
@@ -75,6 +89,7 @@ function App() {
           openForm={handleFormOpen}
           createOrEdit={handleCreateOrEditActivity}
           deleteActivity={handleDeleteActivity}
+          submitting={submitting}
         />
       </Container>
     </>

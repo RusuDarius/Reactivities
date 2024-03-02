@@ -8,18 +8,18 @@ import {
 import { Activity } from "../../../app/models/activity";
 import { ChangeEvent, useState } from "react";
 
-//TODO Form functionalities
-
 interface FormProps {
   closeForm: () => void;
   activity: Activity | undefined;
   createOrEdit: (activity: Activity) => void;
+  submitting: boolean;
 }
 
 const ActivityForm = ({
   closeForm,
   activity: selectedActivity,
   createOrEdit,
+  submitting,
 }: FormProps) => {
   const initialState = selectedActivity ?? {
     id: "",
@@ -83,7 +83,13 @@ const ActivityForm = ({
           name="venue"
           onChange={handleInputChange}
         ></FormInput>
-        <Button floated="right" positive type="submit" content="Submit" />
+        <Button
+          floated="right"
+          positive
+          type="submit"
+          content="Submit"
+          loading={submitting}
+        />
         <Button
           floated="right"
           type="button"
