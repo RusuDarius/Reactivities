@@ -11,11 +11,13 @@ import {
   Segment,
 } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
+import { SyntheticEvent, useState } from "react";
 
 interface ListProps {
   activities: Activity[];
   selectActivity: (id: string) => void;
   deleteActivity: (id: string) => void;
+  submitting: boolean;
 }
 
 function LabelDisplaySwitch(activity: Activity) {
@@ -45,7 +47,15 @@ const ActivityList = ({
   activities,
   selectActivity,
   deleteActivity,
+  submitting,
 }: ListProps) => {
+  const [target, setTarget] = useState("");
+
+  const handleActivityDelete = (e: SyntheticEvent, id: string) => {
+    setTarget(e.currentTarget.name);
+    deleteActivity(id);
+  };
+
   return (
     <Segment>
       <ItemGroup divided>
@@ -66,7 +76,9 @@ const ActivityList = ({
                   floated="right"
                   color="red"
                   content="Delete"
-                  onClick={() => deleteActivity(activity.id)}
+                  name={activity.id}
+                  loading={submitting && target == activity.id}
+                  onClick={(e) => handleActivityDelete(e, activity.id)}
                 />
                 {LabelDisplaySwitch(activity)}
               </ItemExtra>

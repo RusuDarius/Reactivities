@@ -16,7 +16,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  //* Fetch data from the BE
   useEffect(() => {
     agent.Activities.list().then((res) => {
       const activities: Activity[] = [];
@@ -70,7 +69,11 @@ function App() {
   };
 
   const handleDeleteActivity = (id: string) => {
-    setActivities(activities.filter((act) => act.id != id));
+    setSubmitting(true);
+    agent.Activities.delete(id).then(() => {
+      setActivities(activities.filter((act) => act.id != id));
+      setSubmitting(false);
+    });
   };
 
   if (loading) return <LoadingComponents content="Loading app" />;
