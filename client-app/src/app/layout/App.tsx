@@ -6,8 +6,11 @@ import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import agent from "../api/agent";
 import LoadingComponents from "./LoadingComponents";
+import { useStore } from "../stores/store";
 
 function App() {
+  const { activityStore } = useStore();
+
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
@@ -76,7 +79,7 @@ function App() {
     });
   };
 
-  if (loading) return <LoadingComponents content="Loading app" />;
+  if (loading) return <LoadingComponents content="Loading app..." />;
 
   return (
     <>

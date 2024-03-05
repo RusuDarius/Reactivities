@@ -23,18 +23,23 @@ interface ListProps {
 function LabelDisplaySwitch(activity: Activity) {
   switch (activity.category) {
     case "drinks":
+    case "Drinks":
       return <Label color="green">{activity.category}</Label>;
       break;
     case "film":
+    case "Film":
       return <Label color="red">{activity.category}</Label>;
       break;
     case "culture":
+    case "Culture":
       return <Label color="yellow">{activity.category}</Label>;
       break;
     case "music":
+    case "Music":
       return <Label color="olive">{activity.category}</Label>;
       break;
     case "travel":
+    case "Travel":
       return <Label color="teal">{activity.category}</Label>;
       break;
 
@@ -52,6 +57,7 @@ const ActivityList = ({
   const [target, setTarget] = useState("");
 
   const handleActivityDelete = (e: SyntheticEvent, id: string) => {
+    // setTarget(id) to remove the usage of e
     setTarget(e.currentTarget.name);
     deleteActivity(id);
   };
