@@ -1,6 +1,5 @@
 import { Button, Container, Menu, MenuItem } from "semantic-ui-react";
 import { useStore } from "../stores/store";
-import { observer } from "mobx-react-lite";
 
 const NavBar = () => {
   const { activityStore } = useStore();
@@ -29,4 +28,4 @@ const NavBar = () => {
   );
 };
 
-export default observer(NavBar);
+export default NavBar;

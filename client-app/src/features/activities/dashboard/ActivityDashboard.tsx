@@ -8,14 +8,12 @@ import { observer } from "mobx-react-lite";
 
 interface DashboardProps {
   activities: Activity[];
-  createOrEdit: (activity: Activity) => void;
   deleteActivity: (id: string) => void;
   submitting: boolean;
 }
 
 const ActivityDashboard = ({
   activities,
-  createOrEdit,
   deleteActivity,
   submitting,
 }: DashboardProps) => {
@@ -33,9 +31,7 @@ const ActivityDashboard = ({
       </GridColumn>
       <GridColumn width={6}>
         {selectedActivity && !isFormOpen && <ActivityDetails />}
-        {isFormOpen && (
-          <ActivityForm createOrEdit={createOrEdit} submitting={submitting} />
-        )}
+        {isFormOpen && <ActivityForm />}
       </GridColumn>
     </Grid>
   );
