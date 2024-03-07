@@ -12,10 +12,10 @@ import {
 } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import { SyntheticEvent, useState } from "react";
+import { useStore } from "../../../app/stores/store";
 
 interface ListProps {
   activities: Activity[];
-  selectActivity: (id: string) => void;
   deleteActivity: (id: string) => void;
   submitting: boolean;
 }
@@ -50,7 +50,6 @@ function LabelDisplaySwitch(activity: Activity) {
 
 const ActivityList = ({
   activities,
-  selectActivity,
   deleteActivity,
   submitting,
 }: ListProps) => {
@@ -61,6 +60,8 @@ const ActivityList = ({
     setTarget(e.currentTarget.name);
     deleteActivity(id);
   };
+
+  const { activityStore } = useStore();
 
   return (
     <Segment>
@@ -76,7 +77,7 @@ const ActivityList = ({
                   floated="right"
                   color="blue"
                   content="View"
-                  onClick={() => selectActivity(activity.id)}
+                  onClick={() => activityStore.selectActivity(activity.id)}
                 />
                 <Button
                   floated="right"

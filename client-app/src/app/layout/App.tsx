@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { Activity } from "../models/activity";
 import { v4 as uuid } from "uuid";
 import NavBar from "./NavBar";
@@ -16,37 +16,11 @@ function App() {
     Activity | undefined
   >(undefined);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    agent.Activities.list().then((res) => {
-      const activities: Activity[] = [];
-      res.forEach((activity) => {
-        activity.date = activity.date.split("T")[0];
-        activities.push(activity);
-      });
-      setActivities(activities);
-      setLoading(false);
-    });
-  }, []);
-
-  const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities.find((act) => act.id === id));
-  };
-
-  const handleCancelSelectActivity = () => {
-    setSelectedActivity(undefined);
-  };
-
-  const handleFormOpen = (id?: string) => {
-    id ? handleSelectActivity(id) : handleCancelSelectActivity();
-    setIsFormOpen(true);
-  };
-
-  const handleFormClose = () => {
-    setIsFormOpen(false);
-  };
+    activityStore.loadActivities();
+  }, [activityStore]);
 
   const handleCreateOrEditActivity = (activity: Activity) => {
     setSubmitting(true);
@@ -79,26 +53,15 @@ function App() {
     });
   };
 
-  if (loading) return <LoadingComponents content="Loading app..." />;
+  if (activityStore.loadingInitial)
+    return <LoadingComponents content="Loading app..." />;
 
   return (
     <>
-      <NavBar openForm={handleFormOpen} />
+      <NavBar />
       <Container style={{ marginTop: "7em" }}>
-        <Button
-          content="Add exclaamtion!"
-          positive
-          onClick={activityStore.setTitle}
-        />
-        <h2>{activityStore.title}</h2>
         <ActivityDashboard
-          activities={activities}
-          selectedActivity={selectedActivity}
-          selectActivity={handleSelectActivity}
-          cancelSelectActivity={handleCancelSelectActivity}
-          isFormOpen={isFormOpen}
-          closeForm={handleFormClose}
-          openForm={handleFormOpen}
+          activities={activityStore.activities}
           createOrEdit={handleCreateOrEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}

@@ -1,13 +1,52 @@
 import { makeAutoObservable } from "mobx";
+import { Activity } from "../models/activity";
+import agent from "../api/agent";
 
 export default class ActivityStore {
-  title = "Hello from MobX";
+  activities: Activity[] = [];
+  selectedActivity: Activity | undefined = undefined;
+  isFormOpen = false;
+  loading = false;
+  loadingInitial = true;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setTitle = () => {
-    this.title = this.title + "!";
+  loadActivities = async () => {
+    try {
+      const activities = await agent.Activities.list();
+      activities.forEach((activity) => {
+        activity.date = activity.date.split("T")[0];
+        this.activities.push(activity);
+        this.setLoadingInitial(false);
+      });
+    } catch (error) {
+      console.log(error);
+      this.setLoadingInitial(false);
+    }
+  };
+
+  setLoadingInitial = (state: boolean) => {
+    this.loadingInitial = state;
+  };
+
+  selectActivity = (id: string | undefined) => {
+    this.selectedActivity = this.activities.find(
+      (activity) => activity.id === id
+    );
+  };
+
+  cancelSelectedActivity = () => {
+    this.selectedActivity = undefined;
+  };
+
+  openForm = (id?: string) => {
+    id ? this.selectActivity(id) : this.cancelSelectedActivity();
+    this.isFormOpen = true;
+  };
+
+  closeForm = () => {
+    this.isFormOpen = false;
   };
 }

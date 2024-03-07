@@ -7,20 +7,18 @@ import {
 } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import { ChangeEvent, useState } from "react";
+import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
 interface FormProps {
-  closeForm: () => void;
-  activity: Activity | undefined;
   createOrEdit: (activity: Activity) => void;
   submitting: boolean;
 }
 
-const ActivityForm = ({
-  closeForm,
-  activity: selectedActivity,
-  createOrEdit,
-  submitting,
-}: FormProps) => {
+const ActivityForm = ({ createOrEdit, submitting }: FormProps) => {
+  const { activityStore } = useStore();
+  const { selectedActivity, closeForm } = activityStore;
+
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
@@ -101,4 +99,4 @@ const ActivityForm = ({
   );
 };
 
-export default ActivityForm;
+export default observer(ActivityForm);
