@@ -13,12 +13,7 @@ import {
 import { Activity } from "../../../app/models/activity";
 import { SyntheticEvent, useState } from "react";
 import { useStore } from "../../../app/stores/store";
-
-interface ListProps {
-  activities: Activity[];
-  deleteActivity: (id: string) => void;
-  submitting: boolean;
-}
+import { observer } from "mobx-react-lite";
 
 function LabelDisplaySwitch(activity: Activity) {
   switch (activity.category) {
@@ -48,11 +43,9 @@ function LabelDisplaySwitch(activity: Activity) {
   }
 }
 
-const ActivityList = ({
-  activities,
-  deleteActivity,
-  submitting,
-}: ListProps) => {
+const ActivityList = () => {
+  const { activityStore } = useStore();
+  const { activitiesByDate, deleteActivity, loading } = activityStore;
   const [target, setTarget] = useState("");
 
   const handleActivityDelete = (e: SyntheticEvent, id: string) => {
@@ -61,12 +54,10 @@ const ActivityList = ({
     deleteActivity(id);
   };
 
-  const { activityStore } = useStore();
-
   return (
     <Segment>
       <ItemGroup divided>
-        {activities.map((activity) => (
+        {activitiesByDate.map((activity) => (
           <Item key={activity.id}>
             <ItemContent>
               <ItemHeader as="a">{activity.title}</ItemHeader>
@@ -84,7 +75,7 @@ const ActivityList = ({
                   color="red"
                   content="Delete"
                   name={activity.id}
-                  loading={submitting && target == activity.id}
+                  loading={loading && target == activity.id}
                   onClick={(e) => handleActivityDelete(e, activity.id)}
                 />
                 {LabelDisplaySwitch(activity)}
@@ -97,4 +88,4 @@ const ActivityList = ({
   );
 };
 
-export default ActivityList;
+export default observer(ActivityList);
