@@ -11,7 +11,7 @@ import {
 import { useStore } from "../../../app/stores/store";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
 import { observer } from "mobx-react-lite";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const ActivityDetails = () => {
@@ -47,7 +47,7 @@ const ActivityDetails = () => {
       <CardContent extra>
         <ButtonGroup widths={2}>
           <Button
-            as={NavLink}
+            as={Link}
             to={`/manage/${activity.id}`}
             color="blue"
             content="Edit"

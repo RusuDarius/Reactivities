@@ -5,9 +5,10 @@ import {
   FormTextArea,
   Segment,
 } from "semantic-ui-react";
+import { v4 as uuid } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
 
@@ -21,6 +22,7 @@ const ActivityForm = () => {
     loadingInitial,
   } = activityStore;
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [activity, setActivity] = useState<Activity>({
     id: "",
@@ -37,7 +39,16 @@ const ActivityForm = () => {
   }, [id, loadActivity]);
 
   const handleSubmit = () => {
-    activity.id ? updateActivity(activity) : createActivity(activity);
+    if (!activity.id) {
+      activity.id = uuid();
+      createActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    } else {
+      updateActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    }
   };
 
   const handleInputChange = (
