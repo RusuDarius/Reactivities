@@ -5,15 +5,24 @@ import {
   FormTextArea,
   Segment,
 } from "semantic-ui-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
+import { useParams } from "react-router-dom";
+import { Activity } from "../../../app/models/activity";
+import LoadingComponents from "../../../app/layout/LoadingComponents";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
-  const { selectedActivity, createActivity, updateActivity, loading } =
-    activityStore;
+  const {
+    createActivity,
+    updateActivity,
+    loading,
+    loadActivity,
+    loadingInitial,
+  } = activityStore;
+  const { id } = useParams();
 
-  const initialState = selectedActivity ?? {
+  const [activity, setActivity] = useState<Activity>({
     id: "",
     title: "",
     category: "",
@@ -21,8 +30,11 @@ const ActivityForm = () => {
     date: "",
     city: "",
     venue: "",
-  };
-  const [activity, setActivity] = useState(initialState);
+  });
+
+  useEffect(() => {
+    if (id) loadActivity(id).then((activity) => setActivity(activity!));
+  }, [id, loadActivity]);
 
   const handleSubmit = () => {
     activity.id ? updateActivity(activity) : createActivity(activity);
@@ -34,6 +46,8 @@ const ActivityForm = () => {
     const { name, value } = event.target;
     setActivity({ ...activity, [name]: value });
   };
+
+  if (loadingInitial) return <LoadingComponents content="Loading..." />;
 
   return (
     <Segment clearing>
