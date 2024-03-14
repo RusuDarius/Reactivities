@@ -8,7 +8,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
 
@@ -107,7 +107,13 @@ const ActivityForm = () => {
           content="Submit"
           loading={loading}
         />
-        <Button floated="right" type="button" content="Cancel" />
+        <Button
+          as={NavLink}
+          to="/activities"
+          floated="right"
+          type="button"
+          content="Cancel"
+        />
       </Form>
     </Segment>
   );
