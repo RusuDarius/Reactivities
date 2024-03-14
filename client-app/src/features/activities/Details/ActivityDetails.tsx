@@ -11,16 +11,24 @@ import {
 import { useStore } from "../../../app/stores/store";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
 import { observer } from "mobx-react-lite";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const ActivityDetails = () => {
   const { activityStore } = useStore();
   const {
     selectedActivity: activity,
-    openForm,
-    cancelSelectedActivity,
+    loadActivity,
+    loadingInitial,
   } = activityStore;
+  const { id } = useParams();
 
-  if (!activity) return <LoadingComponents content="Loading..." />;
+  useEffect(() => {
+    if (id) loadActivity(id);
+  }, [id, loadActivity]);
+
+  if (loadingInitial || !activity)
+    return <LoadingComponents content="Loading..." />;
 
   return (
     <Card fluid>
@@ -38,16 +46,8 @@ const ActivityDetails = () => {
       </CardContent>
       <CardContent extra>
         <ButtonGroup widths={2}>
-          <Button
-            color="blue"
-            content="Edit"
-            onClick={() => openForm(activity.id)}
-          />
-          <Button
-            color="grey"
-            content="Cancel"
-            onClick={() => cancelSelectedActivity()}
-          />
+          <Button color="blue" content="Edit" />
+          <Button color="grey" content="Cancel" />
         </ButtonGroup>
       </CardContent>
     </Card>

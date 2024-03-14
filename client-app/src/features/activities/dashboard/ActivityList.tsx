@@ -14,6 +14,7 @@ import { Activity } from "../../../app/models/activity";
 import { SyntheticEvent, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 function LabelDisplaySwitch(activity: Activity) {
   switch (activity.category) {
@@ -65,10 +66,11 @@ const ActivityList = () => {
               <ItemDescription>{activity.description}</ItemDescription>
               <ItemExtra>
                 <Button
+                  as={Link}
+                  to={`/activities/${activity.id}`}
                   floated="right"
                   color="blue"
                   content="View"
-                  onClick={() => activityStore.selectActivity(activity.id)}
                 />
                 <Button
                   floated="right"
