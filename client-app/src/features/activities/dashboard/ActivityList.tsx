@@ -1,20 +1,9 @@
-import {
-  Button,
-  Item,
-  ItemContent,
-  ItemDescription,
-  ItemExtra,
-  ItemGroup,
-  ItemHeader,
-  ItemMeta,
-  Label,
-  Segment,
-} from "semantic-ui-react";
+import { Header, ItemGroup, Label, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
-import { SyntheticEvent, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import ActivityListItem from "./ActivityListItem";
+import { Fragment } from "react";
 
 function LabelDisplaySwitch(activity: Activity) {
   switch (activity.category) {
@@ -46,47 +35,29 @@ function LabelDisplaySwitch(activity: Activity) {
 
 const ActivityList = () => {
   const { activityStore } = useStore();
-  const { activitiesByDate, deleteActivity, loading } = activityStore;
-  const [target, setTarget] = useState("");
-
-  const handleActivityDelete = (e: SyntheticEvent, id: string) => {
-    // setTarget(id) to remove the usage of e
-    setTarget(e.currentTarget.name);
-    deleteActivity(id);
-  };
+  const { groupedActivities } = activityStore;
 
   return (
-    <Segment>
-      <ItemGroup divided>
-        {activitiesByDate.map((activity) => (
-          <Item key={activity.id}>
-            <ItemContent>
-              <ItemHeader as="a">{activity.title}</ItemHeader>
-              <ItemMeta>{activity.date}</ItemMeta>
-              <ItemDescription>{activity.description}</ItemDescription>
-              <ItemExtra>
-                <Button
-                  as={Link}
-                  to={`/activities/${activity.id}`}
-                  floated="right"
-                  color="blue"
-                  content="View"
+    <>
+      {groupedActivities.map(([group, activities]) => (
+        <Fragment key={group}>
+          <Header sub color="teal">
+            {group}
+          </Header>
+          <Segment>
+            <ItemGroup divided>
+              {activities.map((activity) => (
+                <ActivityListItem
+                  key={activity.id}
+                  activity={activity}
+                  labelSwitch={LabelDisplaySwitch}
                 />
-                <Button
-                  floated="right"
-                  color="red"
-                  content="Delete"
-                  name={activity.id}
-                  loading={loading && target == activity.id}
-                  onClick={(e) => handleActivityDelete(e, activity.id)}
-                />
-                {LabelDisplaySwitch(activity)}
-              </ItemExtra>
-            </ItemContent>
-          </Item>
-        ))}
-      </ItemGroup>
-    </Segment>
+              ))}
+            </ItemGroup>
+          </Segment>
+        </Fragment>
+      ))}
+    </>
   );
 };
 
