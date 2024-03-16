@@ -1,4 +1,4 @@
-import { Header, ItemGroup, Label, Segment } from "semantic-ui-react";
+import { Header, Label } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
@@ -44,17 +44,13 @@ const ActivityList = () => {
           <Header sub color="teal">
             {group}
           </Header>
-          <Segment>
-            <ItemGroup divided>
-              {activities.map((activity) => (
-                <ActivityListItem
-                  key={activity.id}
-                  activity={activity}
-                  labelSwitch={LabelDisplaySwitch}
-                />
-              ))}
-            </ItemGroup>
-          </Segment>
+          {activities.map((activity) => (
+            <ActivityListItem
+              key={activity.id}
+              activity={activity}
+              labelSwitch={LabelDisplaySwitch}
+            />
+          ))}
         </Fragment>
       ))}
     </>
