@@ -38,7 +38,7 @@ const ActivityDetailedHeader = ({ activity }: ActivityDetailedHeaderProps) => {
                 />
                 <p>{activity.date}</p>
                 <p>
-                  Hosted by <strong>Bob</strong>
+                  Hosted by <strong>Darius</strong>
                 </p>
               </Item.Content>
             </Item>
