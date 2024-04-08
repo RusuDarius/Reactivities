@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent, useState } from "react";
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -13,24 +13,12 @@ import {
   SegmentGroup,
 } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
-import { useStore } from "../../../app/stores/store";
-
 interface ActivityListItemProps {
   activity: Activity;
   labelSwitch: (activity: Activity) => ReactNode;
 }
 
-const ActivityListItem = ({ activity, labelSwitch }: ActivityListItemProps) => {
-  const { activityStore } = useStore();
-  const { activitiesByDate, deleteActivity, loading } = activityStore;
-  const [target, setTarget] = useState("");
-
-  const handleActivityDelete = (e: SyntheticEvent, id: string) => {
-    // setTarget(id) to remove the usage of e
-    setTarget(e.currentTarget.name);
-    deleteActivity(id);
-  };
-
+const ActivityListItem = ({ activity }: ActivityListItemProps) => {
   return (
     <SegmentGroup>
       <Segment>

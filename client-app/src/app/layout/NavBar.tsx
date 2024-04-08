@@ -11,7 +11,7 @@ const NavBar = () => {
             alt="logo"
             style={{ marginRight: 10 }}
           ></img>
-          Reactivities
+          Places
         </MenuItem>
         <MenuItem as={NavLink} to="/activities" name="Activities" />
         <MenuItem>
