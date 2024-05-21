@@ -1,18 +1,17 @@
-using Domain;
+using Application.Core;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
 {
     public class Delete
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
 
@@ -21,20 +20,36 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public async Task Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(
+                Command request,
+                CancellationToken cancellationToken
+            )
             {
-                if (request is not null)
-                {
-                    var activityToDelete = await _context.Activities.FirstOrDefaultAsync(
-                        activity => activity.Id == request.Id
-                    );
-                    // var activity_to_delete = await _context.Activities.FindAsync(request.Id);
-                    if (activityToDelete is not null)
-                    {
-                        _context.Activities.Remove(activityToDelete);
-                        await _context.SaveChangesAsync();
-                    }
-                }
+                var activity = await _context.Activities.FindAsync(request.Id);
+
+                if (activity == null)
+                    return null;
+
+                _context.Remove(activity);
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result)
+                    return Result<Unit>.Failure("Failed to delete activity");
+
+                return Result<Unit>.Success(Unit.Value);
+
+                // if (request is not null)
+                // {
+                //     var activityToDelete = await _context.Activities.FirstOrDefaultAsync(
+                //         activity => activity.Id == request.Id
+                //     );
+                //     // var activity_to_delete = await _context.Activities.FindAsync(request.Id);
+                //     if (activityToDelete is not null)
+                //     {
+                //         _context.Activities.Remove(activityToDelete);
+                //         await _context.SaveChangesAsync();
+                //     }
+                // }
             }
         }
     }
