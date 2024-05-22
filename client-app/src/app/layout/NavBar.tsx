@@ -14,6 +14,7 @@ const NavBar = () => {
           Places
         </MenuItem>
         <MenuItem as={NavLink} to="/activities" name="Activities" />
+        <MenuItem as={NavLink} to="/errors" name="Errors" />
         <MenuItem>
           <Button
             as={NavLink}
