@@ -1,18 +1,10 @@
-import {
-  Button,
-  Form,
-  FormInput,
-  FormTextArea,
-  Segment,
-} from "semantic-ui-react";
-import { v4 as uuid } from "uuid";
-import { ChangeEvent, useEffect, useState } from "react";
+import { Button, Segment } from "semantic-ui-react";
+import { useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
-import { Formik } from "formik";
-import { values } from "mobx";
+import { Formik, Form, Field } from "formik";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -69,45 +61,14 @@ const ActivityForm = () => {
         initialValues={activity}
         onSubmit={(values) => console.log(values)}
       >
-        {({ values: activity, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit} autoComplete="off">
-            <FormInput
-              placeholder="Title"
-              value={activity.title}
-              name="title"
-              onChange={handleChange}
-            ></FormInput>
-            <FormTextArea
-              placeholder="Description"
-              value={activity.description}
-              name="description"
-              onChange={handleChange}
-            ></FormTextArea>
-            <FormInput
-              placeholder="Category"
-              value={activity.category}
-              name="category"
-              onChange={handleChange}
-            ></FormInput>
-            <FormInput
-              placeholder="Date"
-              type="date"
-              value={activity.date}
-              name="date"
-              onChange={handleChange}
-            ></FormInput>
-            <FormInput
-              placeholder="City"
-              value={activity.city}
-              name="city"
-              onChange={handleChange}
-            ></FormInput>
-            <FormInput
-              placeholder="Venue"
-              value={activity.venue}
-              name="venue"
-              onChange={handleChange}
-            ></FormInput>
+        {({ handleSubmit }) => (
+          <Form onSubmit={handleSubmit} autoComplete="off" className="ui form">
+            <Field placeholder="Title" name="title"></Field>
+            <Field placeholder="Description" name="description"></Field>
+            <Field placeholder="Category" name="category"></Field>
+            <Field placeholder="Date" type="date" name="date"></Field>
+            <Field placeholder="City" name="city"></Field>
+            <Field placeholder="Venue" name="venue"></Field>
             <Button
               floated="right"
               positive
