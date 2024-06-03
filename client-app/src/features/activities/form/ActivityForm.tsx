@@ -1,11 +1,13 @@
-import { Button, FormField, Label, Segment } from "semantic-ui-react";
+import { Button, Segment } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import MyTextInput from "../../../app/common/form/MyTextInput";
+import MyTextArea from "./MyTextArea";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -31,6 +33,11 @@ const ActivityForm = () => {
 
   const validationSchema = Yup.object({
     title: Yup.string().required("The activity title is required"),
+    description: Yup.string().required("The activity description is required"),
+    date: Yup.string().required(),
+    category: Yup.string().required(),
+    venue: Yup.string().required(),
+    city: Yup.string().required(),
   });
 
   useEffect(() => {
@@ -69,20 +76,12 @@ const ActivityForm = () => {
       >
         {({ handleSubmit }) => (
           <Form onSubmit={handleSubmit} autoComplete="off" className="ui form">
-            <FormField>
-              <Field placeholder="Title" name="title"></Field>
-              <ErrorMessage
-                name="title"
-                render={(error) => (
-                  <Label basic color="red" content={error}></Label>
-                )}
-              />
-            </FormField>
-            <Field placeholder="Description" name="description"></Field>
-            <Field placeholder="Category" name="category"></Field>
-            <Field placeholder="Date" type="date" name="date"></Field>
-            <Field placeholder="City" name="city"></Field>
-            <Field placeholder="Venue" name="venue"></Field>
+            <MyTextInput placeholder="Title" name="title" />
+            <MyTextArea placeholder="Description" name="description" rows={4} />
+            <MyTextInput placeholder="Category" name="category" />
+            <MyTextInput placeholder="Date" name="date" />
+            <MyTextInput placeholder="City" name="city" />
+            <MyTextInput placeholder="Venue" name="venue" />
             <Button
               floated="right"
               positive
