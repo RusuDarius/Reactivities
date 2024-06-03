@@ -1,10 +1,11 @@
-import { Button, Segment } from "semantic-ui-react";
+import { Button, FormField, Label, Segment } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponents from "../../../app/layout/LoadingComponents";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -26,6 +27,10 @@ const ActivityForm = () => {
     date: "",
     city: "",
     venue: "",
+  });
+
+  const validationSchema = Yup.object({
+    title: Yup.string().required("The activity title is required"),
   });
 
   useEffect(() => {
@@ -57,13 +62,22 @@ const ActivityForm = () => {
   return (
     <Segment clearing>
       <Formik
+        validationSchema={validationSchema}
         enableReinitialize
         initialValues={activity}
         onSubmit={(values) => console.log(values)}
       >
         {({ handleSubmit }) => (
           <Form onSubmit={handleSubmit} autoComplete="off" className="ui form">
-            <Field placeholder="Title" name="title"></Field>
+            <FormField>
+              <Field placeholder="Title" name="title"></Field>
+              <ErrorMessage
+                name="title"
+                render={(error) => (
+                  <Label basic color="red" content={error}></Label>
+                )}
+              />
+            </FormField>
             <Field placeholder="Description" name="description"></Field>
             <Field placeholder="Category" name="category"></Field>
             <Field placeholder="Date" type="date" name="date"></Field>
