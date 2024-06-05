@@ -7,7 +7,9 @@ import LoadingComponents from "../../../app/layout/LoadingComponents";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import MyTextArea from "./MyTextArea";
+import MyTextArea from "../../../app/common/form/MyTextArea";
+import { categoryOptions } from "../../../app/common/options/CategoryOptions";
+import MySelectInput from "../../../app/common/form/MySelectInput";
 
 const ActivityForm = () => {
   const { activityStore } = useStore();
@@ -78,7 +80,11 @@ const ActivityForm = () => {
           <Form onSubmit={handleSubmit} autoComplete="off" className="ui form">
             <MyTextInput placeholder="Title" name="title" />
             <MyTextArea placeholder="Description" name="description" rows={4} />
-            <MyTextInput placeholder="Category" name="category" />
+            <MySelectInput
+              options={categoryOptions}
+              placeholder="Category"
+              name="category"
+            />
             <MyTextInput placeholder="Date" name="date" />
             <MyTextInput placeholder="City" name="city" />
             <MyTextInput placeholder="Venue" name="venue" />
