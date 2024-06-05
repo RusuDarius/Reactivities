@@ -13,6 +13,7 @@ import {
   SegmentGroup,
 } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
+import { format } from "date-fns";
 interface ActivityListItemProps {
   activity: Activity;
   labelSwitch: (activity: Activity) => ReactNode;
@@ -36,7 +37,7 @@ const ActivityListItem = ({ activity }: ActivityListItemProps) => {
       </Segment>
       <Segment>
         <span>
-          <Icon name="clock" /> {activity.date}
+          <Icon name="clock" /> {format(activity.date!, "dd MMM yyyy h:mm aa")}
           <Icon name="marker" /> {activity.venue}
         </span>
       </Segment>
