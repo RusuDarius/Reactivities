@@ -13,8 +13,6 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new List.Query()));
         }
 
-        //TODO Need to remove this ater testing
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivityById(Guid id)
         {
