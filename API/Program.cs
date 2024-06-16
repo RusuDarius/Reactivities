@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
@@ -39,7 +40,7 @@ try
     await context.Database.MigrateAsync();
     await Seed.SeedData(context, userManager);
 }
-catch (System.Exception ex)
+catch (Exception ex)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured during the migration.");

@@ -1,5 +1,6 @@
 using Application.Activities;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,6 +13,8 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new List.Query()));
         }
 
+        //TODO Need to remove this ater testing
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivityById(Guid id)
         {
