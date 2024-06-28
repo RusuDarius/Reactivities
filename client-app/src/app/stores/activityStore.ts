@@ -43,6 +43,7 @@ export default class ActivityStore {
       this.setLoadingInitial(false);
     } catch (error) {
       console.log(error);
+      // console.log("pula pula");
       this.setLoadingInitial(false);
     }
   };
