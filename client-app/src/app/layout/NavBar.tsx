@@ -53,6 +53,8 @@ const NavBar = () => {
                 icon="user"
               ></DropdownItem>
               <DropdownItem
+                as={Link}
+                to={"/"}
                 onClick={logout}
                 text="Logout"
                 icon="power"

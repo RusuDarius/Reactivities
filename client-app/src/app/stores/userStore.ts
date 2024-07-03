@@ -20,7 +20,7 @@ export default class userStore {
     store.commonStore.setToken(user.token);
     runInAction(() => (this.user = user));
     router.navigate("/activities");
-    store.modalStore.closeModal;
+    store.modalStore.closeModal();
   };
 
   register = async (creds: UserFormValues) => {
@@ -28,7 +28,7 @@ export default class userStore {
     store.commonStore.setToken(user.token);
     runInAction(() => (this.user = user));
     router.navigate("/activities");
-    store.modalStore.closeModal;
+    store.modalStore.closeModal();
   };
 
   logout = () => {

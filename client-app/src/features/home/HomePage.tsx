@@ -23,7 +23,7 @@ const HomePage = () => {
         {userStore.isLoggedIn ? (
           <>
             <Header as={"h2"} inverted content="Welcome to Places" />
-            <Button as={Link} to={"/login"} size="huge" inverted>
+            <Button as={Link} to={"/activities"} size="huge" inverted>
               Go to Activities!
             </Button>
           </>
